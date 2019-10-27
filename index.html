@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Asap:400,500i,700&display=swap" rel="stylesheet">
   
 </head>
-<body>
+<body onkeypress="cheat()">
   <header>
     <h1>Rock Paper Scissors</h1>
   </header>
@@ -36,6 +36,12 @@
   </div>
   
   <p id="action-message">Make your move!</p>
+  
+  <div id="cheat-menu">
+    <button class="cheat-button"onclick="cheatMode = 0">Normal</button>
+    <button class="cheat-button"onclick="cheatMode = 1">User</button>
+    <button class="cheat-button"onclick="cheatMode = 2">Computer</button>
+  </div>
   
   <script src="app.js" charset="utf-8"></script>
 </body>

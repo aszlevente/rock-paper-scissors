@@ -7,9 +7,11 @@ var result_p = document.querySelector('.result p');
 var rock_div = document.getElementById('r');
 var paper_div = document.getElementById('p');
 var scissors_div = document.getElementById('s');
+var cheatMode = 0;
+var test = 0;
 
 function game (userChoice) {
-  var computerChoice = getComputerChoice();
+  var computerChoice = getComputerChoice(userChoice);
   switch (userChoice + computerChoice) {
     case 'rs':
     case 'pr':
@@ -70,10 +72,37 @@ function draw (userChoice, computerChoice) {
   setTimeout(function() { userChoice_div.classList.remove('gray') }, 300);
 }
 
-function getComputerChoice () {
-  var choices = ['r', 'p', 's'];
-  var randomNumber = Math.floor(Math.random() * 3);
-  return choices[randomNumber];
+function getComputerChoice (userChoice) {
+  var randomNumber;
+  switch (cheatMode) {
+    case 0:
+      var choices = ['r', 'p', 's'];
+      randomNumber = Math.floor(Math.random() * 3);
+      return choices[randomNumber];
+      break;
+    case 1:
+      if (userChoice === 'r') {
+        var choices = ['r', 's'];
+      } else if (userChoice === 'p') {
+        var choices = ['r', 'p'];
+      } else {
+        var choices = ['p', 's'];
+      }
+      randomNumber = Math.floor(Math.random() * 2);
+      return choices[randomNumber];
+      break;
+    case 2:
+      if (userChoice === 'r') {
+        var choices = ['r', 'p'];
+      } else if (userChoice === 'p') {
+        var choices = ['s', 'p'];
+      } else {
+        var choices = ['r', 's'];
+      }
+      randomNumber = Math.floor(Math.random() * 2);
+      return choices[randomNumber];
+      break;
+  }
 }
 
 
@@ -90,6 +119,19 @@ function main () {
   scissors_div.addEventListener('click', function() {
     game('s');
   })
+}
+
+function cheat () {
+  var x = event.which;
+  if (x === 99) {
+    if (test === 0) {
+      document.getElementById('cheat-menu').style.display = 'inline-block';
+      test = 1;
+    } else {
+      document.getElementById('cheat-menu').style.display = 'none';
+      test = 0;
+    }
+  }
 }
 
 main();
